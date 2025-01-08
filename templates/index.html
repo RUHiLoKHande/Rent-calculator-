@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent and Bills Split</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    
+    .container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 400px;
+    }
+    
+    h2 {
+        text-align: center;
+    }
+    
+    label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+    }
+    
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #45a049;
+    }
+    
+    .result {
+        background-color: #f9f9f9;
+        padding: 10px;
+        margin-top: 20px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+    .error {
+        color: red;
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    
+</style>
+<body>
+
+    <div class="container">
+        <h2>Rent and Bills Split</h2>
+        <form method="POST">
+            <label for="rent">Total Rent:</label>
+            <input type="number" id="rent" name="rent" required>
+
+            <label for="food">Amount Spent on Food:</label>
+            <input type="number" id="food" name="food" required>
+
+            <label for="electricity">Electricity Bill:</label>
+            <input type="number" id="electricity" name="electricity" required>
+
+            <label for="water">Water Bill:</label>
+            <input type="number" id="water" name="water" required>
+
+            <label for="members">Number of Members:</label>
+            <input type="number" id="members" name="members" required>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if amount_per_member is not none %}
+        <div class="result">
+            Each member has to pay ₹{{ amount_per_member }}
+        </div>
+        {% elif error %}
+        <div class="error">
+            {{ error }}
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
